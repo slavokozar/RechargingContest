@@ -1,0 +1,223 @@
+import * as WebBrowser from 'expo-web-browser';
+import React, {Component} from 'react';
+import {
+    View,
+    Image,
+    Platform,
+    ScrollView,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+} from 'react-native';
+
+import Scanner from "./Scanner";
+
+export default class Home extends Component {
+
+    constructor() {
+        super();
+
+        this.state = {
+            scanned_code: '',
+            Start_Scanner: false,
+        };
+    }
+
+    onSuccess = (e) => {
+        console.log(e.data);
+        // Linking
+        //     .openURL(e.data)
+        //     .catch(err => console.error('An error occured', err));
+    }
+
+
+    render() {
+
+
+        const
+            blocks = [
+                {
+                    id: 2,
+                    name: 'Blok 2',
+                    points: 123
+                },
+                {
+                    id: 3,
+                    name: 'Blok 3',
+                    points: 123
+                },
+                {
+                    id: 4,
+                    name: 'Blok 4',
+                    points: 123
+                },
+                {
+                    id: 5,
+                    name: 'Blok 5',
+                    points: 123
+                },
+                {
+                    id: 6,
+                    name: 'Blok 6',
+                    points: 123
+                },
+                {
+                    id: 7,
+                    name: 'Blok 7',
+                    points: 123
+                },
+                {
+                    id: 8,
+                    name: 'Blok 8',
+                    points: 123
+                },
+                {
+                    id: 9,
+                    name: 'Blok 9',
+                    points: 123
+                },
+                {
+                    id: 10,
+                    name: 'Blok 10',
+                    points: 123
+                },
+                {
+                    id: 11,
+                    name: 'Blok 11',
+                    points: 123
+                }
+            ];
+
+
+        if (this.state.Start_Scanner) {
+            return (
+                <Scanner
+                    handleScanned={(data) => {
+                        this.setState({
+                            Start_Scanner: false,
+                            scanned_code: data
+                        })
+                    }}
+                />
+            )
+        }
+
+        return (
+
+            <View style={styles.container}>
+                <ScrollView
+                    style={styles.container}
+                    contentContainerStyle={styles.contentContainer}>
+                    <View style={styles.logoContainer}>
+                        <Image
+                            source={require('../../../assets/images/recharging_logo.jpg')}
+                            style={styles.logoImage}
+                        />
+
+                    </View>
+                    <Text style={{fontSize: 36, color: 'white', textAlign: 'center'}}>Block Contest</Text>
+
+                    <TouchableOpacity
+                        onPress={() => {
+                            this.setState({
+                                Start_Scanner: true
+                            })
+
+                        }}
+                        style={styles.button}>
+                        <Text style={{color: '#FFF', fontSize: 14}}>
+                            Open QR Scanner
+                        </Text>
+                    </TouchableOpacity>
+                    <Text style={{color: 'white', textAlign: 'center'}}>{this.state.scanned_code}</Text>
+
+
+                    <View style={styles.blockContestWrapper}>
+                        {
+                            blocks.map((block, i) => (
+                                <View key={i} style={styles.blockContestBlock}>
+                                    <View style={styles.blockContestBlockContent}>
+                                        <Text style={styles.blockContestBlockName}>{block.name}</Text>
+                                        <Text style={styles.blockContestBlockPoints}>{block.points}</Text>
+                                    </View>
+                                </View>
+                            ))
+                        }
+
+
+                    </View>
+
+                    {/*<View>*/}
+                    {/*<Text >*/}
+                    {/*Zaciname!*/}
+                    {/*</Text>*/}
+                    {/*</View>*/}
+
+                    {/*<View style={styles.helpContainer}>*/}
+                    {/*<TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>*/}
+                    {/*<Text style={styles.helpLinkText}>*/}
+                    {/*Help, it didn’t automatically reload!*/}
+                    {/*</Text>*/}
+                    {/*</TouchableOpacity>*/}
+                    {/*</View>*/}
+                </ScrollView>
+            </View>
+        )
+
+    }
+}
+
+
+const styles = StyleSheet.create({
+    container: {
+        color: '#fff',
+        backgroundColor: '#000',
+        paddingTop: 24,
+    },
+
+    logoContainer: {
+        width: '33%',
+        aspectRatio: 1,
+        alignItems: 'center',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        marginTop: 10,
+        marginBottom: 20,
+    },
+    logoImage: {
+        width: '100%',
+        height: '100%',
+        resizeMode: 'contain',
+    },
+    blockContestWrapper: {
+        width: '100%',
+        flexDirection: 'row',
+        flexWrap: 'wrap'
+    },
+
+    blockContestBlock: {
+        width: '50%',
+        padding: 10,
+        aspectRatio: 1,
+    },
+
+    blockContestBlockContent: {
+        width: '100%',
+        height: '100%',
+        borderColor: 'white',
+        borderWidth: 2,
+        borderRadius: 10,
+        flexDirection: 'column',
+        justifyContent: 'space-around'
+    },
+    blockContestBlockName: {
+        fontSize: 50,
+        textAlign: 'center',
+        color: '#fff',
+    },
+    blockContestBlockPoints: {
+        fontSize: 20,
+        textAlign: 'center',
+        color: 'yellow'
+    }
+});

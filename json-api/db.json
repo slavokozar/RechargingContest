@@ -1,0 +1,16 @@
+{
+  "contests": [
+    {
+      "id": 123,
+      "name": "Block Contest 2019",
+      "starts_at": "2019-05-01",
+      "ends_at": "2019-05-30"
+    },
+    {
+      "id": 123,
+      "name": "Block Contest 2020",
+      "starts_at": "2019-05-01",
+      "ends_at": "2019-05-30"
+    }
+  ]
+}
